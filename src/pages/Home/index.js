@@ -24,8 +24,8 @@ const HomePage = () => {
         <Search
           data={starwars}
           onChange={(search) => setsearch(search)}
-          search={search}
           goToLink={goToLink}
+          search={search}
           loading={loading}
           setLoading={setLoading}
         />
