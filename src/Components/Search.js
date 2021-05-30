@@ -25,20 +25,6 @@ const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
     }
     setLoading(false)
   }, [data, search])
-
-  const handleClear = () => {
-    setSearch('')
-    onChange('')
-    setLoading(false)
-  }
-  const inputChange = (e) => {
-    setSearch(e.target.value)
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }
-
   const handleChangeSuggestions = (e) => {
     switch (e.keyCode) {
       //ArrowDown
@@ -67,6 +53,19 @@ const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
         return
       }
     }
+  }
+
+  const handleClear = () => {
+    setSearch('')
+    onChange('')
+    setLoading(false)
+  }
+  const inputChange = (e) => {
+    setSearch(e.target.value)
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
   }
 
   return (
