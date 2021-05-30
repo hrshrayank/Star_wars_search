@@ -5,7 +5,7 @@ import { useThrottle } from 'use-throttle'
 const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
   const [search, setSearch] = useState('')
   const [active, setActive] = useState(0)
-  const scrollRef = useRef()
+  const scrollReferance = useRef()
   const throttledText = useThrottle(search, 1000)
   const [suggestions, setSuggestions] = useState([])
 
@@ -26,7 +26,7 @@ const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
     setLoading(false)
   }, [data, search])
 
-  const handleInputChange = (e) => {
+  const inputChange = (e) => {
     setSearch(e.target.value)
     setLoading(true)
     setTimeout(() => {
@@ -72,22 +72,28 @@ const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
   return (
     <>
       <SearchBarWrapper search={search} onKeyUp={handleChangeSuggestions}>
-        <Input value={search} onChange={handleInputChange} />
+        <Input value={search} onChange={inputChange} />
         <RightSide>
-          {search && <div onClick={handleClear}> X </div>}
+          {search && (
+            <div
+              onClick={handleClear}
+              style={{ marginTop: '5px', cursor: 'pointer' }}
+            >
+              X
+            </div>
+          )}
           {loading && <Loader />}
         </RightSide>
         <SearchImage
           src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyn5dnDz1NqUwdBFa9w0q9W-zDk4kVdUgktApk5CCcZLvForvpgjHtu1xG-96NZkGFn7Q&usqp=CAU'
           alt='icon'
-          ByteLengthQueuingStrategy
         />
       </SearchBarWrapper>
       {!loading && (
         <SuggestionBox
-          ref={scrollRef}
+          ref={scrollReferance}
           limit={3}
-          len={suggestions.length}
+          length={suggestions.length}
           active={active}
         >
           {suggestions.map((item, index) => (
@@ -144,16 +150,17 @@ const RightSide = styled.div`
 `
 
 const SuggestionBox = styled.div`
-  display: ${({ len }) => (len !== 0 ? 'flex' : 'none')};
-  flex-direction: column;
   background: #2d2f30;
   color: #f2f2f2;
   flex: 0 0 auto;
+  flex-direction: column;
+  display: ${({ length }) => (length !== 0 ? 'flex' : 'none')};
   max-height: 150px;
   overflow: auto;
+  cursor: pointer;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
-  border-top-color: ${({ len }) => (len ? 'transparent' : 'black')};
+  border-top-color: ${({ length }) => (length ? 'transparent' : 'black')};
   border: 1px solid black;
   & * {
     flex: 1;
@@ -179,7 +186,7 @@ const Loader = styled.div`
   width: 20px;
   height: 20px;
   margin-left: 10px;
-  animation: spin 2s linear infinite;
+  animation: spin 3s linear infinite;
   @keyframes spin {
     0% {
       transform: rotate(0deg);
