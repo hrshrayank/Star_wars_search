@@ -16,7 +16,7 @@ function Person() {
       <button onClick={() => goToLink()}>Back</button>
       {starwars.map((item) =>
         Number(id) === Number(item.id) ? (
-          <div className='box'>
+          <div className='box' key={item.id}>
             <div className='box_image'>
               <img src={item.image} alt={item.name} />
             </div>
@@ -38,7 +38,7 @@ function Person() {
               <div className='info_heading'>Physical description</div>
               <div
                 className='info_bio'
-                style={{ 'border-bottom-right-radius': '16px' }}
+                style={{ borderBottomRightRadius: '16px' }}
               >
                 <div className='bio_headers'>
                   <div>Species</div>

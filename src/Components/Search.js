@@ -24,7 +24,7 @@ const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
       setSuggestions(out)
     }
     setLoading(false)
-  }, [data, search])
+  }, [data, search, setLoading])
   const handleChangeSuggestions = (e) => {
     switch (e.keyCode) {
       //ArrowDown
