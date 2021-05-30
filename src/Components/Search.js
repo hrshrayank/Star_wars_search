@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { useThrottle } from 'use-throttle'
 
 const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
-  const [search, setSearch] = useState('')
   const [active, setActive] = useState(0)
+  const [search, setSearch] = useState('')
   const scrollReferance = useRef()
   const throttledText = useThrottle(search, 1000)
   const [suggestions, setSuggestions] = useState([])
