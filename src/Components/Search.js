@@ -26,17 +26,17 @@ const Search = ({ data, onChange, goToLink, loading, setLoading }) => {
     setLoading(false)
   }, [data, search])
 
+  const handleClear = () => {
+    setSearch('')
+    onChange('')
+    setLoading(false)
+  }
   const inputChange = (e) => {
     setSearch(e.target.value)
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
     }, 1000)
-  }
-  const handleClear = () => {
-    setSearch('')
-    onChange('')
-    setLoading(false)
   }
 
   const handleChangeSuggestions = (e) => {
